@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "deny": [
+      "Read(**.env)",
+      "Read(**.env.*)",
+      "Read(**master.key)",
+      "Read(**sandbox.key)",
+      "Read(**staging.key)",
+      "Read(**production.key)",
+      "Read(**/config/credentials*.yml.enc)",
+      "Read(**/config/credentials*)",
+      "Write(**.env)",
+      "Write(**.env.*)",
+      "Write(**/config/credentials*)",
+      "Write(**master.key)",
+      "Bash(rails credentials:*)",
+      "Bash(EDITOR=* rails credentials:*)",
+      "Bash(gh pr merge*)",
+      "Bash(gh merge*)"
+    ]
+  }
+}
