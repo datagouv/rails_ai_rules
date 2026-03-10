@@ -38,6 +38,8 @@ Exec policy qui interdit :
 - `rails credentials:edit`, `rails credentials:show`
 - `gh pr merge`, `gh merge`
 
+**Limitation** : les `prefix_rule` de Codex ne bloquent que les commandes shell. Codex peut toujours lire les fichiers directement via ses outils internes — il n'existe pas d'équivalent aux deny rules de Claude Code pour ça.
+
 ## Mise à jour
 
 ```bash
