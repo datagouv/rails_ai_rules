@@ -25,10 +25,18 @@ git submodule add <url-du-repo> rails_ai_rules
 
 ## Ce que ça protège
 
-### Deny rules (dans .claude/settings.json)
+### Claude Code (`.claude/settings.json`)
 
+Deny rules qui bloquent :
 - Lecture/écriture des secrets : dotfiles (`.env*`), Rails credentials (`master.key`, `*.key`, `credentials*`)
 - Commandes dangereuses : `rails credentials:*`, `gh pr merge*`
+
+### Codex (`.codexpolicy`)
+
+Exec policy qui interdit :
+- Lecture des secrets via `cat`, `head`, `tail`, `less` sur `.env`, `master.key`, `credentials`
+- `rails credentials:edit`, `rails credentials:show`
+- `gh pr merge`, `gh merge`
 
 ## Mise à jour
 
@@ -53,6 +61,6 @@ Utilise un dummy app Rails minimal (`tests/dummy_app/`) pour vérifier :
 ## Contribuer
 
 1. Fork + branche
-2. Modifier les fichiers (`settings.json`, `install.sh`)
+2. Modifier les fichiers (`settings.json`, `codex.codexpolicy`, `install.sh`)
 3. Tester dans un projet Rails
 4. PR

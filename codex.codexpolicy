@@ -1,0 +1,79 @@
+# Rails AI Rules - deny dangerous commands
+
+prefix_rule(
+    pattern = ["cat", ".env"],
+    decision = "forbidden",
+    justification = "reading secrets is forbidden",
+)
+
+prefix_rule(
+    pattern = ["cat", "config/master.key"],
+    decision = "forbidden",
+    justification = "reading secrets is forbidden",
+)
+
+prefix_rule(
+    pattern = ["cat", "config/credentials"],
+    decision = "forbidden",
+    justification = "reading secrets is forbidden",
+)
+
+prefix_rule(
+    pattern = ["head", ".env"],
+    decision = "forbidden",
+    justification = "reading secrets is forbidden",
+)
+
+prefix_rule(
+    pattern = ["head", "config/master.key"],
+    decision = "forbidden",
+    justification = "reading secrets is forbidden",
+)
+
+prefix_rule(
+    pattern = ["tail", ".env"],
+    decision = "forbidden",
+    justification = "reading secrets is forbidden",
+)
+
+prefix_rule(
+    pattern = ["tail", "config/master.key"],
+    decision = "forbidden",
+    justification = "reading secrets is forbidden",
+)
+
+prefix_rule(
+    pattern = ["less", ".env"],
+    decision = "forbidden",
+    justification = "reading secrets is forbidden",
+)
+
+prefix_rule(
+    pattern = ["less", "config/master.key"],
+    decision = "forbidden",
+    justification = "reading secrets is forbidden",
+)
+
+prefix_rule(
+    pattern = ["rails", "credentials:edit"],
+    decision = "forbidden",
+    justification = "editing credentials is forbidden",
+)
+
+prefix_rule(
+    pattern = ["rails", "credentials:show"],
+    decision = "forbidden",
+    justification = "reading credentials is forbidden",
+)
+
+prefix_rule(
+    pattern = ["gh", "pr", "merge"],
+    decision = "forbidden",
+    justification = "merging PRs is forbidden",
+)
+
+prefix_rule(
+    pattern = ["gh", "merge"],
+    decision = "forbidden",
+    justification = "merging is forbidden",
+)

@@ -37,6 +37,18 @@ else
   echo "Merged rails_ai_rules into existing .claude/settings.json"
 fi
 
+# Codex: install .codexpolicy
+SOURCE_POLICY="$SCRIPT_DIR/codex.codexpolicy"
+TARGET_POLICY="$PROJECT_DIR/.codexpolicy"
+
+if [ ! -f "$TARGET_POLICY" ]; then
+  cp "$SOURCE_POLICY" "$TARGET_POLICY"
+  echo "Created .codexpolicy from rails_ai_rules/codex.codexpolicy"
+else
+  echo "Skipped .codexpolicy (already exists)"
+fi
+
 echo ""
 echo "Done. Rails AI Rules installed:"
-echo "  - Deny rules: secrets, credentials, dangerous commands"
+echo "  - Claude Code: deny rules in .claude/settings.json"
+echo "  - Codex: exec policy in .codexpolicy"

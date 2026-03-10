@@ -21,6 +21,7 @@ fail() {
 
 setup() {
   rm -rf "$DUMMY_APP/rails_ai_rules"
+  rm -f "$DUMMY_APP/.codexpolicy"
   cp "$DUMMY_SETTINGS_ORIG" "$DUMMY_SETTINGS"
   ln -s "$REPO_ROOT" "$DUMMY_APP/rails_ai_rules"
 }
@@ -93,10 +94,43 @@ else
 fi
 
 echo ""
+echo "=== Test 4: Codex .codexpolicy installed ==="
+
+setup
+
+"$DUMMY_APP/rails_ai_rules/install.sh" > /dev/null
+
+if [ -f "$DUMMY_APP/.codexpolicy" ]; then
+  pass ".codexpolicy created"
+else
+  fail ".codexpolicy not created"
+fi
+
+if grep -q 'decision = "forbidden"' "$DUMMY_APP/.codexpolicy"; then
+  pass ".codexpolicy contains forbidden rules"
+else
+  fail ".codexpolicy missing forbidden rules"
+fi
+
+echo ""
+echo "=== Test 5: Codex .codexpolicy not overwritten ==="
+
+echo "# custom policy" > "$DUMMY_APP/.codexpolicy"
+
+"$DUMMY_APP/rails_ai_rules/install.sh" > /dev/null
+
+if grep -q "# custom policy" "$DUMMY_APP/.codexpolicy"; then
+  pass "existing .codexpolicy preserved"
+else
+  fail "existing .codexpolicy overwritten"
+fi
+
+echo ""
 
 # Restore original settings
 cp "$DUMMY_SETTINGS_ORIG" "$DUMMY_SETTINGS"
 rm -f "$DUMMY_SETTINGS_ORIG"
+rm -f "$DUMMY_APP/.codexpolicy"
 rm -rf "$DUMMY_APP/rails_ai_rules"
 
 echo "=== Results: $passed passed, $failed failed ==="
