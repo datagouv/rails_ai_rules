@@ -19,7 +19,7 @@ d'empêcher l'accès aux secrets.
 
 ```bash
 # Dans le projet Rails cible
-git submodule add <url-du-repo> rails_ai_rules
+git submodule add git@github.com:datagouv/rails_ai_rules.git rails_ai_rules
 ./rails_ai_rules/install.sh
 ```
 
